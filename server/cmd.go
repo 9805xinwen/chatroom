@@ -1,5 +1,7 @@
 package server
 
+import "flag"
+
 type Command interface {
 	Execute(*Conn, string)
 }
@@ -8,26 +10,30 @@ type commandMap map[string]Command
 
 var (
 	commands = commandMap{
-		"LOGIN": commandLogin{},
-		"SEND": commandSend{},
-		"QUIT": commandQuit{},
+		LoginCommandName: commandLogin{},
+		"SEND":           commandSend{},
+		"QUIT":           commandQuit{},
 	}
 )
 
-type commandLogin struct {}
+type commandLogin struct{}
 
-func (cmd commandLogin) Execute(conn *Conn, param string)  {
-	
-}
+const LoginCommandName string = "LOGIN"
 
-type commandSend struct {}
+var loginFlag *flag.FlagSet = flag.NewFlagSet(LoginCommandName, flag.ContinueOnError)
 
-func (cmd commandSend) Execute(conn *Conn, param string)  {
+func (cmd commandLogin) Execute(conn *Conn, param string) {
 
 }
 
-type commandQuit struct {}
+type commandSend struct{}
 
-func (cmd commandQuit) Execute(conn *Conn, param string)  {
+func (cmd commandSend) Execute(conn *Conn, param string) {
+
+}
+
+type commandQuit struct{}
+
+func (cmd commandQuit) Execute(conn *Conn, param string) {
 
 }
