@@ -89,7 +89,6 @@ func (conn *Conn) writeMessage(message string) (wrote int, err error) {
 	return
 }
 
-
 func (conn *Conn) Close() {
 	conn.conn.Close()
 	conn.closed = true

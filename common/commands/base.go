@@ -1,9 +1,11 @@
 package commands
 
 import (
+	"bytes"
 	"errors"
 	"flag"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -23,6 +25,10 @@ type Params struct {
 	Str string
 
 	Info interface{}
+
+	Args []string
+
+	Bundle map[string]interface{}
 }
 
 type ParamSupport struct {
@@ -71,26 +77,148 @@ type ModelProviderBase struct {
 	supports  map[string]ParamSupport
 }
 
-func NewDefaultModelProvider(modelType reflect.Type) ModelProvider {
-	var supportMap map[string]ParamSupport
+func NewDefaultModelProvider(modelType reflect.Type) (ModelProvider, error) {
+	var supportMap map[string]ParamSupport = map[string]ParamSupport{}
 
 	//参数模型的参数设置
 	for i := 0; i < modelType.NumField(); i++ {
+
 		filed := modelType.Field(i)
-		support := ParamSupport{
-			FiledName:  filed.Name,
-			Name:       filed.Name,
-			Usage:      "",
-			BaseStruct: modelType,
-			Kind:       filed.Type.Kind(),
+		tag := filed.Tag
+
+		//设置默认值
+		var defaultValue interface{}
+		var err error
+		if v, exist := tag.Lookup("value"); exist {
+			switch filed.Type.Kind() {
+			case reflect.String:
+				defaultValue = v
+			case reflect.Bool:
+				defaultValue, err = strconv.ParseBool(v)
+			case reflect.Int:
+				defaultValue, err = strconv.Atoi(v)
+			case reflect.Int8:
+				defaultValue, err = strconv.ParseInt(v, 10, 8)
+				defaultValue = int8(defaultValue.(int64))
+			case reflect.Int16:
+				defaultValue, err = strconv.ParseInt(v, 10, 16)
+				defaultValue = int16(defaultValue.(int64))
+			case reflect.Int32:
+				defaultValue, err = strconv.ParseInt(v, 10, 32)
+				defaultValue = int32(defaultValue.(int64))
+			case reflect.Int64:
+				defaultValue, err = strconv.ParseInt(v, 10, 64)
+				defaultValue = defaultValue.(int64)
+			case reflect.Uint:
+				defaultValue, err = strconv.ParseUint(v, 10, 32)
+				defaultValue = uint(defaultValue.(uint64))
+			case reflect.Uint8:
+				defaultValue, err = strconv.ParseUint(v, 10, 8)
+				defaultValue = uint8(defaultValue.(uint64))
+			case reflect.Uint16:
+				defaultValue, err = strconv.ParseUint(v, 10, 16)
+				defaultValue = uint16(defaultValue.(uint64))
+			case reflect.Uint32:
+				defaultValue, err = strconv.ParseUint(v, 10, 32)
+				defaultValue = uint32(defaultValue.(uint64))
+			case reflect.Uint64:
+				defaultValue, err = strconv.ParseUint(v, 10, 64)
+				defaultValue = defaultValue.(uint64)
+			case reflect.Float32:
+				defaultValue, err = strconv.ParseFloat(v, 32)
+				defaultValue = float32(defaultValue.(float64))
+			case reflect.Float64:
+				defaultValue, err = strconv.ParseFloat(v, 64)
+				defaultValue = defaultValue.(float64)
+				break
+			}
+
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			switch filed.Type.Kind() {
+			case reflect.String:
+				defaultValue = ""
+			case reflect.Bool:
+				defaultValue = false
+			case reflect.Int:
+				defaultValue = int(0)
+			case reflect.Int8:
+				defaultValue = int8(0)
+			case reflect.Int16:
+				defaultValue = int16(0)
+			case reflect.Int32:
+				defaultValue = int32(0)
+			case reflect.Int64:
+				defaultValue = int64(0)
+			case reflect.Uint:
+				defaultValue = uint(0)
+			case reflect.Uint8:
+				defaultValue = uint8(0)
+			case reflect.Uint16:
+				defaultValue = uint16(0)
+			case reflect.Uint32:
+				defaultValue = uint32(0)
+			case reflect.Uint64:
+				defaultValue = uint64(0)
+			case reflect.Float32:
+				defaultValue = float32(0)
+			case reflect.Float64:
+				defaultValue = float64(0)
+				break
+			}
 		}
+
+		//获取使用方法
+		var usage string
+		if v, exist := tag.Lookup("usage"); exist {
+			usage = v
+		} else {
+			usage = filed.Name + " for " + modelType.Name()
+		}
+
+		//获取参数名
+		var supportName string
+		if v, exist := tag.Lookup("name"); exist {
+			supportName = v
+		} else {
+			//将驼峰命名转换为 小写+横杠 的模式
+			//如 : NewBee --> new-bee
+			strBytes := []byte(filed.Name)
+			buffer := new(bytes.Buffer)
+			for i := 0; i < len(strBytes); i++ {
+				nowChar := strBytes[i]
+				if 'A' < nowChar && nowChar < 'Z' {
+					if i > 0 {
+						buffer.WriteByte('-') //添加横杠
+					}
+					buffer.WriteByte(nowChar + 32) //转换
+				} else {
+					buffer.WriteByte(nowChar)
+				}
+			}
+			supportName = buffer.String()
+		}
+
+		//生成ParamSupport
+		support := ParamSupport{
+			FiledName:    filed.Name,
+			Name:         supportName,
+			Usage:        usage,
+			BaseStruct:   modelType,
+			Kind:         filed.Type.Kind(),
+			DefaultValue: defaultValue,
+		}
+
 		supportMap[filed.Name] = support
+
 	}
 
 	return &ModelProviderBase{
 		modelType: modelType,
 		supports:  supportMap,
-	}
+	}, nil
 }
 
 func NewModelProvider(modelType reflect.Type, paramSupports []ParamSupport) ModelProvider {
@@ -120,31 +248,50 @@ func (provider *ModelProviderBase) GetParamSupport(filedName string) (ParamSuppo
 //                                                          //
 //////////////////////////////////////////////////////////////
 
+type ErrorHandling flag.ErrorHandling
+
+const (
+	ContinueOnError ErrorHandling = iota // Return a descriptive error.
+	ExitOnError                          // Call os.Exit(2) or for -h/-help Exit(0).
+	PanicOnError                         // Call panic with a descriptive error.
+)
+
 type CommandBase struct {
 	Command
 
-	runner Runner
+	runner func(params Params) error
 
-	flags flag.FlagSet
+	flags *flag.FlagSet
 
 	modelProvider ModelProvider
 }
 
-func NewCommand(runner Runner, flags flag.FlagSet, provider ModelProvider) Command {
-	return &CommandBase{runner: runner, flags: flags, modelProvider: provider}
+func NewCommand(commandName string, errorHandling ErrorHandling, runner func(params Params) error, provider ModelProvider) Command {
+	flags := flag.NewFlagSet(commandName, flag.ErrorHandling(errorHandling))
+	return &CommandBase{
+		runner:        runner,
+		flags:         flags,
+		modelProvider: provider}
 }
 
-func (cmd *CommandBase) Execute(str string) error {
+func CreateDefaultCommand(command string, modelType reflect.Type, runner func(params Params) error) Command {
+	provider, err := NewDefaultModelProvider(modelType)
+	if err != nil {
+		return nil
+	}
+	return NewCommand(command, ContinueOnError, runner, provider)
+}
+
+func (cmd *CommandBase) Execute(str string, bundle map[string]interface{}) error {
 
 	//构建模型
 	model := cmd.modelProvider.GetParamsModel()
 
 	//复制flag解析器
 	flagCopy := flag.NewFlagSet(cmd.flags.Name(), cmd.flags.ErrorHandling())
-	StructCopy(flagCopy, cmd.flags)
 
 	//获取参数
-	modelType := reflect.TypeOf(model)
+	modelType := reflect.TypeOf(model).Elem()
 	valueMap := map[string]interface{}{}
 
 	//参数模型的参数设置
@@ -205,13 +352,13 @@ func (cmd *CommandBase) Execute(str string) error {
 	}
 
 	//对命令进行解析
-	err := flagCopy.Parse(strings.Fields(str))
+	err := flagCopy.Parse(strings.Fields(str)[1:])
 	if err != nil {
 		return err
 	}
 
 	//赋值
-	modelValue := reflect.ValueOf(&model)
+	modelValue := reflect.ValueOf(model)
 	modelValue = modelValue.Elem() //添加这一个才能赋值
 
 	for i := 0; i < modelType.NumField(); i++ {
@@ -248,8 +395,13 @@ func (cmd *CommandBase) Execute(str string) error {
 	}
 
 	//设置参数
-	params := Params{Str: str, Info: model}
+	params := Params{
+		Str:    str,
+		Info:   model,
+		Args:   flagCopy.Args(),
+		Bundle: bundle,
+	}
 
 	//将参数传入runner
-	return cmd.runner.Run(params)
+	return cmd.runner(params)
 }
