@@ -16,6 +16,7 @@ const (
 	defaultWelcomeMessage = "Welcome to the chatroom"
 )
 
+//一个用户一条连接
 type Conn struct {
 	conn          net.Conn
 	controlReader *bufio.Reader
@@ -28,6 +29,7 @@ type Conn struct {
 	closed        bool
 }
 
+//生成唯一id标识连接
 func newSessionID() string {
 	hash := sha256.New()
 	_, err := io.CopyN(hash, rand.Reader, 50)
@@ -39,6 +41,7 @@ func newSessionID() string {
 	return mdStr[0:20]
 }
 
+//为单条连接serve
 func (conn *Conn) Serve() {
 	log.Print(conn.sessionID, "Connection Established")
 
@@ -62,6 +65,7 @@ func (conn *Conn) Serve() {
 	log.Print(conn.sessionID, "Connection Terminated")
 }
 
+//处理请求
 func (conn *Conn) receiveLine(line string) {
 	command, param := conn.parseLine(line)
 	log.Printf("%s %s %s", conn.sessionID, command, param)
@@ -69,9 +73,17 @@ func (conn *Conn) receiveLine(line string) {
 	if cmdObj == nil {
 		return
 	}
-	cmdObj.Execute(conn, param)
+	//if cmdObj.RequireParam() && param == "" {
+	//
+	//} else
+	if cmdObj.RequireAuth() && conn.user == "" {
+
+	} else {
+		cmdObj.Execute(conn, param)
+	}
 }
 
+//解析请求
 func (conn *Conn) parseLine(line string) (string, string) {
 	params := strings.SplitN(strings.Trim(line, "\r\n"), " ", 2)
 	if len(params) == 1 {
@@ -80,7 +92,7 @@ func (conn *Conn) parseLine(line string) (string, string) {
 	return params[0], strings.TrimSpace(params[1])
 }
 
-// writeMessage will send a standard FTP response back to the client.
+//向连接中写入信息
 func (conn *Conn) writeMessage(message string) (wrote int, err error) {
 	log.Print("%s %s %s", conn.sessionID, message)
 	line := fmt.Sprintf("%s\r\n", message)
@@ -89,7 +101,7 @@ func (conn *Conn) writeMessage(message string) (wrote int, err error) {
 	return
 }
 
-
+//关闭连接
 func (conn *Conn) Close() {
 	conn.conn.Close()
 	conn.closed = true
