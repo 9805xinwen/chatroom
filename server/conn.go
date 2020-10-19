@@ -21,11 +21,12 @@ type Conn struct {
 	conn          net.Conn
 	controlReader *bufio.Reader
 	controlWriter *bufio.Writer
-	auth          Auth
+	user          User
 	server        *Server
 	sessionID     string
-	reqUser       string
-	user          string
+	reqUserId     string
+	userId        string
+	userName      string
 	closed        bool
 }
 
@@ -44,6 +45,7 @@ func newSessionID() string {
 //为单条连接serve
 func (conn *Conn) Serve() {
 	log.Print(conn.sessionID, "Connection Established")
+	conn.writeMessage(defaultWelcomeMessage)
 
 	for {
 		line, err := conn.controlReader.ReadString('\n')
@@ -76,7 +78,7 @@ func (conn *Conn) receiveLine(line string) {
 	//if cmdObj.RequireParam() && param == "" {
 	//
 	//} else
-	if cmdObj.RequireAuth() && conn.user == "" {
+	if cmdObj.RequireAuth() && conn.userId == "" {
 
 	} else {
 		cmdObj.Execute(conn, param)
@@ -94,7 +96,7 @@ func (conn *Conn) parseLine(line string) (string, string) {
 
 //向连接中写入信息
 func (conn *Conn) writeMessage(message string) (wrote int, err error) {
-	log.Print("%s %s %s", conn.sessionID, message)
+	log.Printf("发送给：%s %s", conn.sessionID, message)
 	line := fmt.Sprintf("%s\r\n", message)
 	wrote, err = conn.controlWriter.WriteString(line)
 	conn.controlWriter.Flush()

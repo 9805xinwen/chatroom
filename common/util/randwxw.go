@@ -1,3 +1,10 @@
+/*
+随机数生成器
+用途：每次运行产生指定范围内的唯一存在的数字
+用法：第一步，调用NewRandomUnique()工厂方法产生生成器r，此方法需要一个redis实例作为参数传入，同时传入min，max，
+	第二步，调用r.Next()或r.Next(key string)返回一个int64
+*/
+
 package util
 
 import (
@@ -40,6 +47,22 @@ func (r RandomUnique) Next() (res int64) {
 	}
 	return
 }
+
+func (r RandomUnique) NextWithKey(key string) (res int64) {
+	if r.DB.SCard(key).Val() == (r.Max - r.Min) {
+		panic("当前范围内的数字都已被使用")
+	}
+	rand.Seed(r.Seed)
+	for {
+		res = rand.Int63n(r.Max-r.Min) + r.Min
+		if !r.DB.SIsMember(key, res).Val() {
+			r.DB.SAdd(key, res)
+			break
+		}
+	}
+	return
+}
+
 
 /*
 

@@ -13,7 +13,7 @@ import (
 var ErrServerClosed = errors.New("chatroom: Server closed")
 
 type ServerOpts struct {
-	Auth     Auth
+	User     User
 	Name     string
 	Hostname string
 	Port     int
@@ -58,8 +58,8 @@ func serverOptsWithDefaults(opts *ServerOpts) *ServerOpts {
 		newOpts.WelcomeMessage = opts.WelcomeMessage
 	}
 
-	if opts.Auth != nil {
-		newOpts.Auth = opts.Auth
+	if opts.User != nil {
+		newOpts.User = opts.User
 	}
 
 	return &newOpts
@@ -78,7 +78,7 @@ func (server *Server) newConn(tcpConn net.Conn) *Conn {
 	c.conn = tcpConn
 	c.controlReader = bufio.NewReader(tcpConn)
 	c.controlWriter = bufio.NewWriter(tcpConn)
-	c.auth = server.Auth
+	c.user = server.User
 	c.server = server
 	c.sessionID = newSessionID()
 
