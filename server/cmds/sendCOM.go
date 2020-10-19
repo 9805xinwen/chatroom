@@ -2,71 +2,56 @@ package cmds
 
 import (
 	"chatroom/common/commands"
-	"net"
 	"reflect"
 )
 
 ////////////////////////////////////////////////////////////////////////
-//                           Login 命令定义                             //
+//                            Send 命令定义                             //
 //--------------------------------------------------------------------//
-// [命令名称] : login                                                   //
+// [命令名称] : send                                                    //
 // [命令参数] :                                                         //
-//            -id                      [默认]用户id                     //
+//             -msg                          发送的信息                 //
+//             -user                         发送给某个用户              //
 //--------------------------------------------------------------------//
 // 使用案例:                                                           //
-// login -id USERNAME                                                 //
-// login USERNAME                                                     //
+// send -user USERNAME -msg "hello!"                                  //
 ////////////////////////////////////////////////////////////////////////
 
-const LoginCommandName string = "login"
+const SendCommandName string = "send"
 
-var LoginCommand commands.Command = commands.CreateDefaultCommand(LoginCommandName, reflect.TypeOf(LoginData{}), LoginRun)
+var SendCommand commands.Command = commands.CreateDefaultCommand(SendCommandName, reflect.TypeOf(SendData{}), SendRun)
 
 ////////////////////////////////////////////////////////////////////////
 //                        主要命令参数结构体定义                          //
 //--------------------------------------------------------------------//
 // 定义结构体:                                                          //
-//        LoginData                          登录数据结构体              //
+//        SendData                           登录数据结构体              //
 //--------------------------------------------------------------------//
-// LoginData                                                          //
+// SendData                                                           //
 // [公开属性] :                                                         //
-//   - UserId                               字符串 | 用户ID号码          //
+//   - Username                                字符串 | 用户名          //
+//   - Massage                                 字符串 | 发送的信息       //
 // [私有属性] : -无-                                                    //
 // [构造函数] : -无-                                                    //
 // [公开函数] : -无-                                                    //
 // [私有函数] : -无-                                                    //
 ////////////////////////////////////////////////////////////////////////
 
-type LoginData struct {
-	UserId string `name:"id" value:"" usage:"登录id"`
+type SendData struct {
+	Username string `name:"user" value:"" usage:"发送给某个用户"`
+	Massage  string `name:"msg"  value:"" usage:"发送的信息"`
 }
 
 ////////////////////////////////////////////////////////////////////////
 //                        主要函数(runner)实现                          //
 //--------------------------------------------------------------------//
 // 实现函数:                                                           //
-//        LoginRun(params commands.Params)       登录处理              //
+//        SendRun(params commands.Params)        发送信息处理           //
 //--------------------------------------------------------------------//
-// 使用的内部的参数结构体(Params.Info属性对应的结构体) ： LoginData          //
+// 使用的内部的参数结构体(Params.Info属性对应的结构体) ： SendRun            //
 ////////////////////////////////////////////////////////////////////////
 
-func LoginRun(params commands.Params) error {
-	data := params.Info.(*LoginData)
-
-	//判断参数中的userid
-	if data.UserId == "" {
-		//检查默认值
-		if len(params.Args) > 0 {
-			data.UserId = params.Args[0]
-		}
-	}
-
-	//判断userId是否存在
-	//如果存在返回登陆成功，否则断开连接
-
-	//获取连接
-	connect := params.Bundle[Connect].(net.Conn)
-	connect.Close()
+func SendRun(params commands.Params) error {
 
 	return nil
 }
