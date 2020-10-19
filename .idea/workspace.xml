@@ -20,14 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f9f544c-b8e0-490f-8985-65bceb72254f" name="Default Changelist" comment="implement auth">
-      <change afterPath="$PROJECT_DIR$/server/services/message/message.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/services/users/online.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/services/users/users.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/example/server1.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/example/server1.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/user.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/message/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/message/message.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/users/online.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/users/online.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,10 +205,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="387" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1602553428922" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603070033710">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603094318478">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1603070033710" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1603094318478" />
     <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1602927267441">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -253,9 +249,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="96" y="88" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602320441834" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602303183394">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603096671156">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602303183394" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603096671156" />
   </component>
 </project>

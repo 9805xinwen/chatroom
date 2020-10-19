@@ -1,6 +1,7 @@
 package server
 
 import (
+	"chatroom/server/services/message"
 	"chatroom/server/services/users"
 	"log"
 	"net"
@@ -12,6 +13,7 @@ var (
 	UserList *users.RedisUsers
 	OnlineList *users.MapOnline
 	Conns []*net.Conn
+	SMS message.SimpleMessageService
 )
 
 type ServerOpts struct {
@@ -56,6 +58,7 @@ func initSomething()  {
 	UserList = users.NewRedisUser()
 	OnlineList = users.NewMapOnline()
 	Conns = []*net.Conn{}
+	SMS = message.SimpleMessageService{}
 }
 
 //新建服务器
