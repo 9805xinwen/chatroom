@@ -20,11 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f9f544c-b8e0-490f-8985-65bceb72254f" name="Default Changelist" comment="implement auth">
+      <change afterPath="$PROJECT_DIR$/server/services/message/message.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/services/users/online.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/services/users/users.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/util/randwxw.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/util/randwxw.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/cmd.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmd.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/conn.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/conn.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/example/server1.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/example/server1.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/user.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,16 +65,17 @@
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\560363\go\src\awesomeProject\chatroom" />
-      <recent name="C:\Users\560363\go\src\awesomeProject" />
-      <recent name="C:\Users\560363\go\src\awesomeProject\randwxw" />
-      <recent name="C:\Users\560363\go\src\mysqldbwxw\mysqldbwxw1" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\560363\go\src\awesomeProject" />
       <recent name="C:\Users\560363\go\src" />
       <recent name="C:\Go\src\mysqlDbzxw" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\560363\go\src\chatroom\server\services\message" />
+      <recent name="C:\Users\560363\go\src\chatroom\server\services" />
+      <recent name="C:\Users\560363\go\src\awesomeProject\chatroom" />
+      <recent name="C:\Users\560363\go\src\awesomeProject" />
+      <recent name="C:\Users\560363\go\src\awesomeProject\randwxw" />
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build chatroom/server/example">

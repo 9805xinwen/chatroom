@@ -1,9 +1,12 @@
 package main
 
-import "chatroom/server"
+import (
+	"chatroom/server"
+	"chatroom/server/services"
+)
 
 func main() {
-	redisUser := server.NewRedisUser()
+	redisUser := services.NewRedisUser()
 	opts := &server.ServerOpts{User: redisUser}
 	s := server.NewServer(opts)
 	s.ListenAndServe()

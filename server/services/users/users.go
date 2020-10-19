@@ -1,4 +1,4 @@
-package server
+package users
 
 import (
 	"chatroom/common/util"
@@ -8,30 +8,31 @@ import (
 	"strconv"
 )
 
-type User interface {
-	Register(name string) (id string, err error)
-	GetName(id string) (name string, err error)
-	GetId(name string) (id string, err error)
+//Users 一个接口，定义了操作总用户表的增加和查询方法
+type Users interface {
+	Register(name string) (id string, err error)  //注册
+	GetName(id string) (name string, err error)  //根据id获取name
+	GetId(name string) (id string, err error) //根据name获取id
 }
 
-//一个基于redis的认证器
-type RedisUser struct {
+//RedisUsers 以Redis存储用户信息，实现了User接口
+type RedisUsers struct {
 	db *redis.Client
 }
 
-func NewRedisUser() *RedisUser {
+//创建一个新的用户列表，redis地址指定为localhost:6379
+func NewRedisUser() *RedisUsers {
 	rdb := redis.NewClient(&redis.Options{
 		Addr: "localhost:6379",
 	})
 	if _, err := rdb.Ping().Result(); err != nil {
 		panic(err)
 	}
-	auth := &RedisUser{rdb}
+	auth := &RedisUsers{rdb}
 	return auth
 }
 
-//用户注册, 用户表为id，name的一一映射
-func (user *RedisUser) Register(name string) (id string, err error) {
+func (user *RedisUsers) Register(name string) (id string, err error) {
 	rrand := util.NewRandomUnique(user.db, 10000, 99999)
 	id = strconv.FormatInt(rrand.NextWithKey("user"), 10)
 
@@ -56,14 +57,14 @@ func (user *RedisUser) Register(name string) (id string, err error) {
 }
 
 
-func (user *RedisUser) GetName(id string) (string, error) {
+func (user *RedisUsers) GetName(id string) (string, error) {
 	hkey := fmt.Sprintf("USER:ID:%s", id)
 	name, err := user.db.HGet(hkey, "name").Result()
 
 	return name, err
 }
 
-func (user *RedisUser) GetId(name string) (string, error) {
+func (user *RedisUsers) GetId(name string) (string, error) {
 	hkey := fmt.Sprintf("USER:NAME:%s", name)
 	id, err := user.db.HGet(hkey, "id").Result()
 
