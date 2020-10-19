@@ -45,8 +45,6 @@ func EchoRun(params Params) error {
 //////////////////////////////////////////////////////////////
 
 func TestSayHelloCommand(t *testing.T) {
-	//echo "hello%20world%20!"
-
 	cmd := "echo -content \"hello!\" "
 	bundle := map[string]interface{}{
 		"Connect": "connecting", //net.Conn

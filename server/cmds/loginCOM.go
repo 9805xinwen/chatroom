@@ -2,6 +2,7 @@ package cmds
 
 import (
 	"chatroom/common/commands"
+	"net"
 	"reflect"
 )
 
@@ -62,6 +63,10 @@ func LoginRun(params commands.Params) error {
 
 	//判断userId是否存在
 	//如果存在返回登陆成功，否则断开连接
+
+	//获取连接
+	connect := params.Bundle[Connect].(net.Conn)
+	connect.Close()
 
 	return nil
 }
