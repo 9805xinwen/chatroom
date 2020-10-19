@@ -6,62 +6,45 @@ import (
 )
 
 ////////////////////////////////////////////////////////////////////////
-//                           Login 命令定义                             //
+//                            Quit 命令定义                             //
 //--------------------------------------------------------------------//
-// [命令名称] : login                                                   //
-// [命令参数] :                                                         //
-//            -id                      [默认]用户id                     //
+// [命令名称] : quit                                                    //
+// [命令参数] : -无-                                                    //
 //--------------------------------------------------------------------//
 // 使用案例:                                                           //
-// login -id USERNAME                                                 //
-// login USERNAME                                                     //
+// quit                                                               //
 ////////////////////////////////////////////////////////////////////////
 
-const LoginCommandName string = "login"
+const QuitCommandName string = "quit"
 
-var LoginCommand commands.Command = commands.CreateDefaultCommand(LoginCommandName, reflect.TypeOf(LoginData{}), LoginRun)
+var QuitCommand commands.Command = commands.CreateDefaultCommand(QuitCommandName, reflect.TypeOf(QuitData{}), QuitRun)
 
 ////////////////////////////////////////////////////////////////////////
 //                        主要命令参数结构体实现                          //
 //--------------------------------------------------------------------//
 // 实现结构体:                                                          //
-//        LoginData                          登录数据结构体              //
+//        QuitData                          退出数据结构体               //
 //--------------------------------------------------------------------//
-// LoginData                                                          //
-// [公开属性] :                                                         //
-//   - UserId                               字符串 | 用户ID号码          //
+// QuitData                                                           //
+// [公开属性] : -无-                                                    //
 // [私有属性] : -无-                                                    //
 // [构造函数] : -无-                                                    //
 // [公开函数] : -无-                                                    //
 // [私有函数] : -无-                                                    //
 ////////////////////////////////////////////////////////////////////////
 
-type LoginData struct {
-	UserId string `name:"id" value:"" usage:"登录id"`
-}
+type QuitData struct{}
 
 ////////////////////////////////////////////////////////////////////////
 //                        主要函数(runner)实现                          //
 //--------------------------------------------------------------------//
 // 实现函数:                                                           //
-//        LoginRun(params commands.Params)       登录处理              //
+//        QuitRun(params commands.Params)        退出处理              //
 //--------------------------------------------------------------------//
-// 使用的内部的参数结构体(Params.Info属性对应的结构体) ： LoginData          //
+// 使用的内部的参数结构体(Params.Info属性对应的结构体) ： QuitData           //
 ////////////////////////////////////////////////////////////////////////
 
-func LoginRun(params commands.Params) error {
-	data := params.Info.(*LoginData)
-
-	//判断参数中的userid
-	if data.UserId == "" {
-		//检查默认值
-		if len(params.Args) > 0 {
-			data.UserId = params.Args[0]
-		}
-	}
-
-	//判断userId是否存在
-	//如果存在返回登陆成功，否则断开连接
+func QuitRun(params commands.Params) error {
 
 	return nil
 }

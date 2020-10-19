@@ -2,6 +2,7 @@ package server
 
 import (
 	"bufio"
+	"chatroom/server/cmds"
 	"crypto/rand"
 	"crypto/sha256"
 	"encoding/hex"
@@ -65,7 +66,7 @@ func (conn *Conn) Serve() {
 func (conn *Conn) receiveLine(line string) {
 	command, param := conn.parseLine(line)
 	log.Printf("%s %s %s", conn.sessionID, command, param)
-	cmdObj := commands[strings.ToUpper(command)]
+	cmdObj := cmds.commands[strings.ToUpper(command)]
 	if cmdObj == nil {
 		return
 	}
