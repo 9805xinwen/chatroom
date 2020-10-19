@@ -20,9 +20,9 @@ const QuitCommandName string = "quit"
 var QuitCommand commands.Command = commands.CreateDefaultCommand(QuitCommandName, reflect.TypeOf(QuitData{}), QuitRun)
 
 ////////////////////////////////////////////////////////////////////////
-//                        主要命令参数结构体实现                          //
+//                        主要命令参数结构体定义                          //
 //--------------------------------------------------------------------//
-// 实现结构体:                                                          //
+// 定义结构体:                                                          //
 //        QuitData                          退出数据结构体               //
 //--------------------------------------------------------------------//
 // QuitData                                                           //

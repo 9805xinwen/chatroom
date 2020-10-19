@@ -22,9 +22,9 @@ const SendCommandName string = "send"
 var SendCommand commands.Command = commands.CreateDefaultCommand(SendCommandName, reflect.TypeOf(SendData{}), SendRun)
 
 ////////////////////////////////////////////////////////////////////////
-//                        主要命令参数结构体实现                          //
+//                        主要命令参数结构体定义                          //
 //--------------------------------------------------------------------//
-// 实现结构体:                                                          //
+// 定义结构体:                                                          //
 //        SendData                           登录数据结构体              //
 //--------------------------------------------------------------------//
 // SendData                                                           //

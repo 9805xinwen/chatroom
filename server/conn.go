@@ -65,6 +65,9 @@ func (conn *Conn) Serve() {
 
 func (conn *Conn) receiveLine(line string) {
 	command, param := conn.parseLine(line)
+
+	fmt.Fprintf(conn.conn, "%s", "ss")
+
 	log.Printf("%s %s %s", conn.sessionID, command, param)
 	cmdObj := cmds.commands[strings.ToUpper(command)]
 	if cmdObj == nil {

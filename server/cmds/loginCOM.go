@@ -22,9 +22,9 @@ const LoginCommandName string = "login"
 var LoginCommand commands.Command = commands.CreateDefaultCommand(LoginCommandName, reflect.TypeOf(LoginData{}), LoginRun)
 
 ////////////////////////////////////////////////////////////////////////
-//                        主要命令参数结构体实现                          //
+//                        主要命令参数结构体定义                          //
 //--------------------------------------------------------------------//
-// 实现结构体:                                                          //
+// 定义结构体:                                                          //
 //        LoginData                          登录数据结构体              //
 //--------------------------------------------------------------------//
 // LoginData                                                          //

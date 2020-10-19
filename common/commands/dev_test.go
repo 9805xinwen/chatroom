@@ -1,10 +1,9 @@
 package commands
 
 import (
-	"errors"
+	"chatroom/common/utils"
 	"fmt"
 	"reflect"
-	"regexp"
 	"strings"
 	"testing"
 )
@@ -20,6 +19,7 @@ type EchoData struct {
 	Content string `name:"content" value:""    usage:"输出的内容"`
 }
 
+// echo -content "hello!" -t 100
 func EchoRun(params Params) error {
 	data := params.Info.(*EchoData)
 
@@ -29,7 +29,7 @@ func EchoRun(params Params) error {
 		}
 	}
 
-	outputStr, _ := DoubleQuotedStringsMarch(data.Content)
+	outputStr, _ := utils.DoubleQuotedStringsMarch(data.Content)
 	outputStr = strings.ReplaceAll(outputStr, "%20", " ")
 
 	var i int64 = 0
@@ -46,6 +46,11 @@ func EchoRun(params Params) error {
 
 func TestSayHelloCommand(t *testing.T) {
 	//echo "hello%20world%20!"
-	cmd := "echo \"Hello%20world%20!\" "
-	EchoCommand.Execute(cmd, nil)
+
+	cmd := "echo -content \"hello!\" "
+	bundle := map[string]interface{}{
+		"Connect": "connecting", //net.Conn
+	}
+	EchoCommand.Execute(cmd, bundle)
+
 }
