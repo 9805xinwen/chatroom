@@ -2,6 +2,7 @@ package cmds
 
 import (
 	"chatroom/common/commands"
+	"net"
 	"reflect"
 )
 
@@ -45,6 +46,15 @@ type QuitData struct{}
 ////////////////////////////////////////////////////////////////////////
 
 func QuitRun(params commands.Params) error {
+
+	//获取连接
+	connect := params.Bundle[Connect].(net.Conn)
+	//断开连接
+	connect.Close()
+	//获取UserId
+	userId := params.Bundle[UserId].(string)
+	//将用户从在线列表去除
+	GlobalOnlineService.Delete(userId)
 
 	return nil
 }

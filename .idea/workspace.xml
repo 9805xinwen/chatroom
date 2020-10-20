@@ -20,21 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/commands/base.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/commands/command.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/commands/dev_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/utils/strings.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/cmd.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/define.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/quitCOM.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/sendCOM.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/command/base.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/command/command.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/command/util.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/commands/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/commands/base.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/commands/dev_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/commands/dev_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmds/cmd.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/cmd.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmds/define.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/define.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/cmds/loginCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/loginCOM.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmds/quitCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/quitCOM.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmds/sendCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/sendCOM.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,14 +41,12 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="C:\Go" />
+  <component name="GOROOT" path="D:/GoLang" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1giMrjIeOKbmpPpntskkt0qdpRA" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -66,10 +57,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="configurable.Global.GOPATH.is.expanded" value="true" />
+    <property name="configurable.Module.GOPATH.is.expanded" value="false" />
+    <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -86,6 +81,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Go Build.go build chatroom/server/example">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="chatroom" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build chat.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="awesomeProject" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -131,6 +135,16 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="chatroom" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Go Build.go build chat.go" />
       <item itemvalue="Go Build.go build chatroom/server/example" />
@@ -140,11 +154,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build chatroom/server/example" />
         <item itemvalue="Go Build.go build test.go" />
-        <item itemvalue="Go Build.go build chat.go" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build main.go (1)" />
+        <item itemvalue="Go Build.go build chatroom/server/example" />
+        <item itemvalue="Go Build.go build chat.go" />
       </list>
     </recent_temporary>
   </component>
@@ -154,6 +168,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -166,6 +185,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="implement auth" />
     <option name="LAST_COMMIT_MESSAGE" value="implement auth" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
   </component>
   <component name="WindowStateProjectService">
     <state x="1232" y="357" key="#Go_Modules" timestamp="1598599497681">
@@ -252,6 +274,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243304" />
+    <state x="760" y="238" key="SettingsEditor" timestamp="1603156436645">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="760" y="238" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603156436645" />
     <state x="100" y="100" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602913425715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -260,9 +286,24 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="96" y="88" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602320441834" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603096671156">
+    <state x="668" y="307" key="git4idea.merge.GitPullDialog" timestamp="1603156180143">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603096671156" />
+    <state x="668" y="307" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1603156180143" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603157946087">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603157946087" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/server/cmds/sendCOM.go</url>
+          <line>72</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

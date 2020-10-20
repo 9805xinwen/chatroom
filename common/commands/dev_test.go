@@ -9,7 +9,7 @@ import (
 )
 
 //////////////////////////////////////////////////////////////
-//                                                          //
+//                 echo命令 [测试]                          //
 //////////////////////////////////////////////////////////////
 
 var EchoCommand Command = CreateDefaultCommand("echo", reflect.TypeOf(EchoData{}), EchoRun)
@@ -41,7 +41,7 @@ func EchoRun(params Params) error {
 }
 
 //////////////////////////////////////////////////////////////
-//                    echo 命令使用测试                       //
+//                    echo 命令使用测试                     //
 //////////////////////////////////////////////////////////////
 
 func TestSayHelloCommand(t *testing.T) {
