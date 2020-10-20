@@ -12,12 +12,11 @@ import (
 
 var ErrServerClosed = errors.New("chatroom: Server closed")
 
-
 type ServerOpts struct {
-	Auth Auth
-	Name string
+	Auth     Auth
+	Name     string
 	Hostname string
-	Port int
+	Port     int
 
 	WelcomeMessage string
 }
@@ -74,7 +73,6 @@ func NewServer(opts *ServerOpts) *Server {
 	return s
 }
 
-
 func (server *Server) newConn(tcpConn net.Conn) *Conn {
 	c := new(Conn)
 	c.conn = tcpConn
@@ -90,7 +88,6 @@ func (server *Server) newConn(tcpConn net.Conn) *Conn {
 func (server *Server) ListenAndServe() error {
 	var listener net.Listener
 	var err error
-
 
 	listener, err = net.Listen("tcp", server.listenTo)
 	if err != nil {
