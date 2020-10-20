@@ -2,7 +2,9 @@ package cmds
 
 import (
 	"chatroom/common/commands"
+	"chatroom/common/utils"
 	"chatroom/server/services/message"
+	"errors"
 	"net"
 	"reflect"
 )
@@ -56,29 +58,47 @@ type SendData struct {
 func SendRun(params commands.Params) error {
 	//获取解析数据
 	data := params.Info.(SendData)
+
 	//检查是否存在发送目标用户
 	_, err := GlobalUserService.GetId(data.Username)
 	if err != nil {
-		return err
+		return errors.New("目标用户不存在！")
 	}
+
 	//获取发送者UserId
 	userId := params.Bundle[UserId].(string)
+
 	//从userId获取username
 	username, err := GlobalUserService.GetName(userId)
 	if err != nil {
 		return err
 	}
+
 	//获取发送者的连接
 	fromConn := params.Bundle[Connect].(*net.Conn)
-	//获取发送连接
-	toConn := GlobalOnlineService.QueryConnByUserName(data.Username)
+
+	//获取发送连接,不在线就设置为nil
+	var toConn *net.Conn
+	if !GlobalOnlineService.OnlineCheckByUserName(data.Username) {
+		toConn = nil
+	} else {
+		toConn = GlobalOnlineService.QueryConnByUserName(data.Username)
+	}
+
+	//发送数据内容处理
+	content, err := utils.DoubleQuotedStringsMarch(data.Massage)
+	if err != nil {
+		return err
+	}
+
 	msg := message.Massage{
 		FromUser: username,
 		ToUser:   data.Username,
 		FromConn: fromConn,
 		ToConn:   toConn,
-		Content:  data.Massage,
+		Content:  content,
 	}
 	GlobalMassageService.Send(msg)
+
 	return nil
 }
