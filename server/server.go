@@ -1,19 +1,16 @@
 package server
 
 import (
+	"bytes"
+	"chatroom/server/cmds"
 	"chatroom/server/services/message"
 	"chatroom/server/services/users"
+	"fmt"
+	"io"
 	"log"
 	"net"
 	"strconv"
-)
-
-
-var (
-	UserList *users.RedisUsers
-	OnlineList *users.MapOnline
-	Conns []*net.Conn
-	SMS message.SimpleMessageService
+	"strings"
 )
 
 type ServerOpts struct {
@@ -55,10 +52,9 @@ func serverOptsWithDefaults(opts *ServerOpts) *ServerOpts {
 
 //初始化全局表量，包括用户表、在线用户表、连接
 func initSomething()  {
-	UserList = users.NewRedisUser()
-	OnlineList = users.NewMapOnline()
-	Conns = []*net.Conn{}
-	SMS = message.SimpleMessageService{}
+	cmds.GlobalUserService = users.NewRedisUser()
+	cmds.GlobalOnlineService = users.NewMapOnline()
+	cmds.GlobalMassageService = message.SimpleMessageService{}
 }
 
 //新建服务器
@@ -100,6 +96,74 @@ func (server *Server) Serve(l net.Listener) error {
 			return err
 		}
 
-		Conns = append(Conns, &tcpConn)
+		go handle(tcpConn)
+	}
+}
+
+func handle(conn net.Conn) {
+	lineBuf := make([]byte, 1024)  //用于从conn里读取数据
+	userIdByte := make([]byte, 5)  //用于login成功后读取用户id
+	userIdBuf := bytes.NewBuffer(userIdByte)
+
+	var login bool  //是否已登陆
+	var loginTimes = 3  //登录次数
+	var userId string  //已登录的用户id
+
+	for {
+		n, err := conn.Read(lineBuf)
+		if err != nil {
+			if err != io.EOF {
+				fmt.Println("read error:", err)
+			}
+			break
+		}
+
+		line := string(lineBuf[:n])
+
+		cmdName := strings.ToLower(strings.SplitN(line, " ", 2)[0])
+
+		if !login {
+			loginTimes --
+			if cmdName != cmds.LoginCommandName {
+				io.WriteString(conn, "请先登录")
+				loginTimes ++
+				break
+			} else {
+				loginBudle := map[string]interface{}{
+					cmds.Connect: conn,
+					cmds.Output: userIdBuf,
+				}
+
+				if err := cmds.LoginCommand.Execute(line, loginBudle); err != nil {
+					//登陆失败
+					msg := fmt.Sprintf("验证失败，您还有%d次机会", loginTimes)
+					io.WriteString(conn, msg)
+					break
+				} else {
+					//登陆成功
+					login = true
+					userId = string(userIdByte)
+					continue
+				}
+
+				if !login && loginTimes <= 0 {
+					//登录次数用尽
+					conn.Close()
+					break
+				}
+			}
+		}
+
+		cmd, ok := cmds.CommandMap[cmdName]
+		if !ok {
+			io.WriteString(conn, "命令不存在")
+			continue
+		}
+
+		bundle := map[string]interface{}{
+			cmds.Connect: conn,
+			cmds.UserId: userId,
+		}
+		cmd.Execute(line, bundle)
 	}
 }

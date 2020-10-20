@@ -21,12 +21,13 @@ type MassageService interface {
 
 type SimpleMessageService struct {}
 
-func (sms *SimpleMessageService) Send(message Massage) {
+func (sms SimpleMessageService) Send(message Massage) error {
 	to := *message.ToConn
 	//do something
 
-	msg := "" //最终发给客户端的消息
+	msg := "hi" //最终发给客户端的消息
 	fmt.Fprint(to, msg)
 	//io.WriteString(to, msg)
 	//io.Write([]byte(msg))
+	return nil
 }

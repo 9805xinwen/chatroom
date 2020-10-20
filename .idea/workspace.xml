@@ -19,23 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/commands/base.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/commands/command.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/commands/dev_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/utils/strings.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/cmd.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/define.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/quitCOM.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/cmds/sendCOM.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/command/base.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/command/command.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/command/util.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/cmds/loginCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/loginCOM.go" afterDir="false" />
-    </list>
+    <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +37,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1giMrjIeOKbmpPpntskkt0qdpRA" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -68,8 +52,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -85,7 +70,7 @@
       <recent name="C:\Go\src\mysqlDbzxw" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build chatroom/server/example">
+  <component name="RunManager" selected="Go Build.go build exampleServer.go">
     <configuration name="go build chat.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="awesomeProject" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -104,12 +89,12 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build main.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="awesomeProject" />
+    <configuration name="go build exampleServer.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="chatroom" />
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/message/bservice/main.go" />
-      <package value="awesomeProject" />
+      <filePath value="$PROJECT_DIR$/server/example/exampleServer.go" />
+      <package value="chatroom" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
@@ -134,17 +119,17 @@
     <list>
       <item itemvalue="Go Build.go build chat.go" />
       <item itemvalue="Go Build.go build chatroom/server/example" />
-      <item itemvalue="Go Build.go build main.go (1)" />
+      <item itemvalue="Go Build.go build exampleServer.go" />
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Build.go build test.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build exampleServer.go" />
         <item itemvalue="Go Build.go build chatroom/server/example" />
         <item itemvalue="Go Build.go build test.go" />
         <item itemvalue="Go Build.go build chat.go" />
         <item itemvalue="Go Build.go build main.go" />
-        <item itemvalue="Go Build.go build main.go (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -216,26 +201,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="387" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1602553428922" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603094318478">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603104413732">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1603094318478" />
-    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1602927267441">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1603104413732" />
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1603165494067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
-    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1602927267441">
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1603165494067" />
+    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1603165494067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
-    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1602927267441">
+    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1603165494067" />
+    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1603165494067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
-    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1602927267441">
+    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1603165494067" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1603165494067">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1603165494067" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1602901243304">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -252,6 +237,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243304" />
+    <state x="510" y="144" key="SettingsEditor" timestamp="1603157531562">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="510" y="144" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603157531562" />
     <state x="100" y="100" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602913425715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
