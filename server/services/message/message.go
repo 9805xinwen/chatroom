@@ -9,8 +9,8 @@ import (
 type Massage struct {
 	FromUser string
 	ToUser string
-	FromConn    *net.Conn
-	ToConn      *net.Conn
+	FromConn *net.Conn
+	ToConn *net.Conn
 	Content string
 }
 
@@ -22,12 +22,7 @@ type MassageService interface {
 type SimpleMessageService struct {}
 
 func (sms SimpleMessageService) Send(message Massage) error {
-	to := *message.ToConn
-	//do something
-
-	msg := "hi" //最终发给客户端的消息
-	fmt.Fprint(to, msg)
-	//io.WriteString(to, msg)
-	//io.Write([]byte(msg))
+	//log.Printf("%s向%s发送消息：%s", message.FromUser, message.ToUser, message.Content)
+	fmt.Fprintf(*message.ToConn, "%s: %s", message.FromUser, message.Content)
 	return nil
 }

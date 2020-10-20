@@ -2,8 +2,10 @@ package cmds
 
 import (
 	"chatroom/common/commands"
+	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"reflect"
 )
@@ -67,14 +69,21 @@ func LoginRun(params commands.Params) error {
 	connect := params.Bundle[Connect].(net.Conn)
 	//判断userId是否存在
 	username, err := GlobalUserService.GetName(data.UserId)
+	log.Print("检查用户ID(",data.UserId,")在线情况：",GlobalOnlineService.OnlineCheckByUserId(data.UserId))
 	//如果存在返回登陆成功
-	if err == nil && !GlobalOnlineService.OnlineCheckByUserId(data.UserId) {
-		//加入在线列表
-		GlobalOnlineService.Add(data.UserId, username, &connect)
-		//写入output
-		output := params.Bundle[Output].(io.Writer)
-		fmt.Fprintln(output, data.UserId)
+	if err == nil  {
+		if !GlobalOnlineService.OnlineCheckByUserId(data.UserId) {
+			//加入在线列表
+			GlobalOnlineService.Add(data.UserId, username, &connect)
+			//写入output
+			output := params.Bundle[Output].(io.Writer)
+			fmt.Fprintln(output, data.UserId)
+			log.Print("用户ID(",data.UserId,")登陆成功")
+		} else {
+			return errors.New("用户ID(" + data.UserId + ")已在线")
+		}
 	} else {
+		log.Print("用户ID(",data.UserId,")登陆失败")
 		return err
 	}
 
