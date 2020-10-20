@@ -94,6 +94,7 @@ func (server *Server) Serve(l net.Listener) error {
 			}
 			return err
 		}
+		log.Printf("与[%s]建立连接", tcpConn.RemoteAddr())
 		go handle(tcpConn)
 	}
 }
@@ -111,6 +112,9 @@ func handle(conn net.Conn) {
 		if err != nil {
 			if err != io.EOF {
 				log.Println("read error:", err)
+				if login {
+					cmds.GlobalOnlineService.Delete(userId)
+				}
 			}
 			break
 		}
@@ -140,7 +144,7 @@ func handle(conn net.Conn) {
 
 				if err := cmds.LoginCommand.Execute(line, loginBudle); err != nil {
 					if !login && loginTimes <= 0 {
-						io.WriteString(conn, "登录次数用尽，即将退出\n")
+						io.WriteString(conn, "登录次数用尽，断开连接\n")
 						//登录次数用尽
 						conn.Close()
 						break
