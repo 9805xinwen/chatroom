@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/commands/base.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/commands/command.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/commands/dev_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/utils/strings.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/cmds/cmd.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/cmds/define.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/cmds/quitCOM.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/cmds/sendCOM.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/command/base.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/command/command.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/command/util.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmds/loginCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/loginCOM.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1giMrjIeOKbmpPpntskkt0qdpRA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="GO_FMT" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\560363\go\src\chatroom\server\services\message" />
+      <recent name="C:\Users\560363\go\src\chatroom\server\services" />
+      <recent name="C:\Users\560363\go\src\awesomeProject\chatroom" />
+      <recent name="C:\Users\560363\go\src\awesomeProject" />
+      <recent name="C:\Users\560363\go\src\awesomeProject\randwxw" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\560363\go\src\awesomeProject" />
+      <recent name="C:\Users\560363\go\src" />
+      <recent name="C:\Go\src\mysqlDbzxw" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Build.go build chatroom/server/example">
+    <configuration name="go build chat.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/chatroom/chat.go" />
+      <package value="awesomeProject" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build chatroom/server/example" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="chatroom" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/server/example/server1.go" />
+      <package value="chatroom/server/example" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/message/bservice/main.go" />
+      <package value="awesomeProject" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/message/aservice/main.go" />
+      <package value="awesomeProject" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build test.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="awesomeProject" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/test.go" />
+      <package value="awesomeProject" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Build.go build chat.go" />
+      <item itemvalue="Go Build.go build chatroom/server/example" />
+      <item itemvalue="Go Build.go build main.go (1)" />
+      <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Build.go build test.go" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build chatroom/server/example" />
+        <item itemvalue="Go Build.go build test.go" />
+        <item itemvalue="Go Build.go build chat.go" />
+        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build main.go (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="implement auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement auth" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1232" y="357" key="#Go_Modules" timestamp="1598599497681">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1232" y="357" key="#Go_Modules/0.0.1920.1040@0.0.1920.1040" timestamp="1598599497681" />
+    <state x="1322" y="382" key="#Notifications" timestamp="1598864419138">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1322" y="382" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1598864419138" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599458238653">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1599458238653" />
+    <state x="1270" y="324" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602913049323">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1270" y="324" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1602913049323" />
+    <state x="659" y="144" key="#go_build_awesomeProject" timestamp="1602128762986">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="659" y="144" key="#go_build_awesomeProject/0.0.1920.1040@0.0.1920.1040" timestamp="1602128762986" />
+    <state x="1139" y="144" key="#go_build_cryptowxw.go" timestamp="1600740405591">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1139" y="144" key="#go_build_cryptowxw.go/0.0.1920.1040@0.0.1920.1040" timestamp="1600740405591" />
+    <state x="656" y="144" key="#go_build_main.go" timestamp="1602641944642">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="144" key="#go_build_main.go/0.0.1920.1040@0.0.1920.1040" timestamp="1602641944642" />
+    <state x="656" y="144" key="#go_build_main.go_(1)" timestamp="1602654072232">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="144" key="#go_build_main.go_(1)/0.0.1920.1040@0.0.1920.1040" timestamp="1602654072232" />
+    <state x="1139" y="144" key="#go_build_netcat.go" timestamp="1602208584558">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1139" y="144" key="#go_build_netcat.go/0.0.1920.1040@0.0.1920.1040" timestamp="1602208584558" />
+    <state x="659" y="144" key="#go_build_randwxw.go" timestamp="1599709052612">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="659" y="144" key="#go_build_randwxw.go/0.0.1920.1040@0.0.1920.1040" timestamp="1599709052612" />
+    <state x="1139" y="144" key="#go_build_world.go" timestamp="1598868060699">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1139" y="144" key="#go_build_world.go/0.0.1920.1040@0.0.1920.1040" timestamp="1598868060699" />
+    <state x="714" y="387" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1602553428922">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="714" y="387" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1602553428922" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1603094318478">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1603094318478" />
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1602927267441">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
+    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1602927267441">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
+    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1602927267441">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1602927267441">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602927267441" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1602901243304">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243304" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1602901243303">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243303" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1602901243303">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243303" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1602901243304">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243304" />
+    <state x="100" y="100" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602913425715">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="100" y="100" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602913425715" />
+    <state x="96" y="88" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1602320441834">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="96" y="88" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1602320441834" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1603096671156">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1603096671156" />
+  </component>
+</project>

@@ -1,46 +1,43 @@
 package server
 
 import (
-	"bufio"
-	"context"
-	"crypto/tls"
-	"errors"
+	"chatroom/server/services/message"
+	"chatroom/server/services/users"
 	"log"
 	"net"
 	"strconv"
 )
 
-var ErrServerClosed = errors.New("chatroom: Server closed")
 
+var (
+	UserList *users.RedisUsers
+	OnlineList *users.MapOnline
+	Conns []*net.Conn
+	SMS message.SimpleMessageService
+)
 
 type ServerOpts struct {
-	Auth Auth
 	Name string
-	Hostname string
+	Host string
 	Port int
-
-	WelcomeMessage string
 }
 
 type Server struct {
 	*ServerOpts
 	listenTo  string
 	listener  net.Listener
-	tlsConfig *tls.Config
-	ctx       context.Context
-	cancel    context.CancelFunc
-	feats     string
 }
 
+//设置默认值
 func serverOptsWithDefaults(opts *ServerOpts) *ServerOpts {
 	var newOpts ServerOpts
 	if opts == nil {
 		opts = &ServerOpts{}
 	}
-	if opts.Hostname == "" {
-		newOpts.Hostname = "::"
+	if opts.Host == "" {
+		newOpts.Host = "::"
 	} else {
-		newOpts.Hostname = opts.Hostname
+		newOpts.Host = opts.Host
 	}
 	if opts.Port == 0 {
 		newOpts.Port = 3000
@@ -53,91 +50,56 @@ func serverOptsWithDefaults(opts *ServerOpts) *ServerOpts {
 		newOpts.Name = opts.Name
 	}
 
-	if opts.WelcomeMessage == "" {
-		newOpts.WelcomeMessage = defaultWelcomeMessage
-	} else {
-		newOpts.WelcomeMessage = opts.WelcomeMessage
-	}
-
-	if opts.Auth != nil {
-		newOpts.Auth = opts.Auth
-	}
-
 	return &newOpts
 }
 
+//初始化全局表量，包括用户表、在线用户表、连接
+func initSomething()  {
+	UserList = users.NewRedisUser()
+	OnlineList = users.NewMapOnline()
+	Conns = []*net.Conn{}
+	SMS = message.SimpleMessageService{}
+}
+
+//新建服务器
 func NewServer(opts *ServerOpts) *Server {
+	initSomething()
+
 	opts = serverOptsWithDefaults(opts)
 	s := new(Server)
 	s.ServerOpts = opts
-	s.listenTo = net.JoinHostPort(opts.Hostname, strconv.Itoa(opts.Port))
+	s.listenTo = net.JoinHostPort(opts.Host, strconv.Itoa(opts.Port))
 	return s
 }
 
 
-func (server *Server) newConn(tcpConn net.Conn) *Conn {
-	c := new(Conn)
-	c.conn = tcpConn
-	c.controlReader = bufio.NewReader(tcpConn)
-	c.controlWriter = bufio.NewWriter(tcpConn)
-	c.auth = server.Auth
-	c.server = server
-	c.sessionID = newSessionID()
-
-	return c
-}
-
+//开始监听
 func (server *Server) ListenAndServe() error {
 	var listener net.Listener
 	var err error
-
 
 	listener, err = net.Listen("tcp", server.listenTo)
 	if err != nil {
 		return err
 	}
 
-	sessionID := ""
-	log.Printf("%s %s listening on %d", sessionID, server.Name, server.Port)
+	log.Printf("%s listening on %d", server.Name, server.Port)
 
 	return server.Serve(listener)
 }
 
-// Serve accepts connections on a given net.Listener and handles each
-// request in a new goroutine.
-//
+//获取每一个请求的连接
 func (server *Server) Serve(l net.Listener) error {
 	server.listener = l
-	server.ctx, server.cancel = context.WithCancel(context.Background())
-	sessionID := ""
 	for {
 		tcpConn, err := server.listener.Accept()
 		if err != nil {
-			select {
-			case <-server.ctx.Done():
-				return ErrServerClosed
-			default:
-			}
-			log.Printf("%s listening error: %v", sessionID, err)
 			if ne, ok := err.(net.Error); ok && ne.Temporary() {
 				continue
 			}
 			return err
 		}
 
-		conn := server.newConn(tcpConn)
-		go conn.Serve()
+		Conns = append(Conns, &tcpConn)
 	}
-}
-
-// Shutdown will gracefully stop a server. Already connected clients will retain their connections
-func (server *Server) Shutdown() error {
-	if server.cancel != nil {
-		server.cancel()
-	}
-	if server.listener != nil {
-		return server.listener.Close()
-	}
-	// server wasnt even started
-	return nil
 }
