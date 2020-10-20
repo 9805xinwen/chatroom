@@ -21,8 +21,8 @@ type ServerOpts struct {
 
 type Server struct {
 	*ServerOpts
-	listenTo  string
-	listener  net.Listener
+	listenTo string
+	listener net.Listener
 }
 
 //设置默认值
@@ -67,7 +67,6 @@ func NewServer(opts *ServerOpts) *Server {
 	s.listenTo = net.JoinHostPort(opts.Host, strconv.Itoa(opts.Port))
 	return s
 }
-
 
 //开始监听
 func (server *Server) ListenAndServe() error {

@@ -10,24 +10,24 @@ import (
 )
 
 ////////////////////////////////////////////////////////////////////////
-//                           参数结构体定义                              //
+//                           参数结构体定义                           //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        Params                             命令参数结构体              //
+// 定义结构体:                                                        //
+//        Params                             命令参数结构体           //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        用于传递命令参数                                               //
+// 描述 ：                                                            //
+//        用于传递命令参数                                            //
 //--------------------------------------------------------------------//
 // Params                                                             //
-// [公开属性] :                                                         //
-//   - Str                                  string | 参数原始字符串      //
-//   - Info                            interface{} | 参数结构体         //
-//   - Args                               []string | 未指定命令数据      //
-//   - Bundle               map[string]interface{} | 自定义数据         //
-// [私有属性] : -无-                                                    //
-// [构造函数] : -无-                                                    //
-// [公开函数] : -无-                                                    //
-// [私有函数] : -无-                                                    //
+// [公开属性] :                                                       //
+//   - Str                                  string | 参数原始字符串   //
+//   - Info                            interface{} | 参数结构体       //
+//   - Args                               []string | 未指定命令数据   //
+//   - Bundle               map[string]interface{} | 自定义数据       //
+// [私有属性] : -无-                                                  //
+// [构造函数] : -无-                                                  //
+// [公开函数] : -无-                                                  //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type Params struct {
@@ -41,29 +41,29 @@ type Params struct {
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                       命令支持参数的结构体定义                         //
+//                       命令支持参数的结构体定义                     //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        ParamSupport                   命令支持参数结构体              //
+// 定义结构体:                                                        //
+//        ParamSupport                   命令支持参数结构体           //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        用于定义命令支持的参数，如 login -id 中的 id                      //
-//        ParamSupport会绑定一个结构体的一个属性来对应获取的参数数据           //
+// 描述 ：                                                            //
+//        用于定义命令支持的参数，如 login -id 中的 id                //
+//        ParamSupport会绑定一个结构体的一个属性来对应获取的参数数据  //
 //--------------------------------------------------------------------//
 // ParamSupport                                                       //
-// [公开属性] :                                                         //
-//   - FiledName                            string | 绑定的结构体的字段名 //
-//   - Name                                 string | 参数名            //
-//   - Usage                                string | 参数用途           //
-//   - BaseStruct                     reflect.Type | 绑定的结构体类型    //
-//   - Kind                           reflect.Kind | 参数本身的类型      //
-//   - DefaultValue                    interface{} | 参数默认数据        //
-// [私有属性] : -无-                                                    //
-// [构造函数] :                                                         //
+// [公开属性] :                                                       //
+//   - FiledName                        string | 绑定的结构体的字段名 //
+//   - Name                             string | 参数名               //
+//   - Usage                            string | 参数用途             //
+//   - BaseStruct                 reflect.Type | 绑定的结构体类型     //
+//   - Kind                       reflect.Kind | 参数本身的类型       //
+//   - DefaultValue                interface{} | 参数默认数据         //
+// [私有属性] : -无-                                                  //
+// [构造函数] :                                                       //
 //   - NewParamSupport(baseStruct reflect.Type, filedName string,     //
 //                     name string, value string, usage string)       //
-// [公开函数] : -无-                                                    //
-// [私有函数] : -无-                                                    //
+// [公开函数] : -无-                                                  //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type ParamSupport struct {
@@ -93,15 +93,15 @@ func NewParamSupport(baseStruct reflect.Type, filedName string, name string, val
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                           模型供应接口定义                            //
+//                           模型供应接口定义                         //
 //--------------------------------------------------------------------//
-// 定义接口:                                                           //
-//        ModelProvider                       参数模型供应接口           //
+// 定义接口:                                                          //
+//        ModelProvider                       参数模型供应接口        //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        用于获取一个ParamSupport参数结构体                              //
+// 描述 ：                                                            //
+//        用于获取一个ParamSupport参数结构体                          //
 //--------------------------------------------------------------------//
-// 函数 :                                                              //
+// 函数 :                                                             //
 // - GetParamSupport(filedName string) (ParamSupport, bool)           //
 //                                                                    //
 // - GetParamsModel() interface{}                                     //
@@ -115,27 +115,27 @@ type ModelProvider interface {
 }
 
 ////////////////////////////////////////////////////////////////////////
-//              实现[ModelProvider接口]的模型供应结构体                   //
+//              实现[ModelProvider接口]的模型供应结构体               //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        ModelProviderBase                    参数模型供应结构体         //
+// 定义结构体:                                                        //
+//        ModelProviderBase                    参数模型供应结构体     //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        该结构体对[ModelProvider接口]进行了实现                          //
+// 描述 ：                                                            //
+//        该结构体对[ModelProvider接口]进行了实现                     //
 //--------------------------------------------------------------------//
 // ModelProviderBase                                                  //
-// [公开属性] : -无-                                                    //
-// [私有属性] :                                                         //
-//   - modelType                      reflect.Type | 绑定的结构体的类型   //
-//   - supports            map[string]ParamSupport | 支持的参数的映射     //
-// [构造函数] :                                                         //
+// [公开属性] : -无-                                                  //
+// [私有属性] :                                                       //
+//   - modelType                    reflect.Type | 绑定的结构体的类型 //
+//   - supports          map[string]ParamSupport | 支持的参数的映射   //
+// [构造函数] :                                                       //
 //   - NewDefaultModelProvider(modelType reflect.Type)                //
 //   - NewModelProvider(modelType reflect.Type,                       //
 //                      paramSupports []ParamSupport)                 //
-// [公开函数] :                                                         //
+// [公开函数] :                                                       //
 //   - GetParamsModel()                                               //
 //   - GetParamSupport(filedName string)                              //
-// [私有函数] : -无-                                                    //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type ModelProviderBase struct {
@@ -312,28 +312,28 @@ func (provider *ModelProviderBase) GetParamSupport(filedName string) (ParamSuppo
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                   实现[Command接口]的命令结构体                        //
+//                   实现[Command接口]的命令结构体                    //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        CommandBase                      参数模型供应结构体            //
+// 定义结构体:                                                        //
+//        CommandBase                      参数模型供应结构体         //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        该结构体对[Command接口]进行了实现                               //
+// 描述 ：                                                            //
+//        该结构体对[Command接口]进行了实现                           //
 //--------------------------------------------------------------------//
 // CommandBase                                                        //
-// [公开属性] : -无-                                                    //
-// [私有属性] :                                                         //
-//   - runner           func(params Params) error | 对命令行处理的函数   //
-//   - flags                        *flag.FlagSet | 解析命令的解析器     //
-//   - modelProvider                modelProvider | 参数模型供应结构体   //
-// [构造函数] :                                                         //
+// [公开属性] : -无-                                                  //
+// [私有属性] :                                                       //
+//   - runner           func(params Params) error | 对命令行处理的函数//
+//   - flags                        *flag.FlagSet | 解析命令的解析器  //
+//   - modelProvider                modelProvider | 参数模型供应结构体//
+// [构造函数] :                                                       //
 //   - NewCommand(commandName string, errorHandling ErrorHandling,    //
 //       runner func(params Params) error, provider ModelProvider)    //
 //   - CreateDefaultCommand(command string, modelType reflect.Type,   //
 //       runner func(params Params) error)                            //
-// [公开函数] :                                                         //
+// [公开函数] :                                                       //
 //   - Execute(str string, bundle map[string]interface{}) error       //
-// [私有函数] : -无-                                                    //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type ErrorHandling flag.ErrorHandling

@@ -2,18 +2,20 @@ package cmds
 
 import (
 	"chatroom/common/commands"
+	"fmt"
+	"io"
 	"net"
 	"reflect"
 )
 
 ////////////////////////////////////////////////////////////////////////
-//                           Login 命令定义                             //
+//                           Login 命令定义                           //
 //--------------------------------------------------------------------//
-// [命令名称] : login                                                   //
-// [命令参数] :                                                         //
-//            -id                      [默认]用户id                     //
+// [命令名称] : login                                                 //
+// [命令参数] :                                                       //
+//            -id                      [默认]用户id                   //
 //--------------------------------------------------------------------//
-// 使用案例:                                                           //
+// 使用案例:                                                          //
 // login -id USERNAME                                                 //
 // login USERNAME                                                     //
 ////////////////////////////////////////////////////////////////////////
@@ -23,18 +25,18 @@ const LoginCommandName string = "login"
 var LoginCommand commands.Command = commands.CreateDefaultCommand(LoginCommandName, reflect.TypeOf(LoginData{}), LoginRun)
 
 ////////////////////////////////////////////////////////////////////////
-//                        主要命令参数结构体定义                          //
+//                        主要命令参数结构体定义                      //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        LoginData                          登录数据结构体              //
+// 定义结构体:                                                        //
+//        LoginData                          登录数据结构体           //
 //--------------------------------------------------------------------//
 // LoginData                                                          //
-// [公开属性] :                                                         //
-//   - UserId                               字符串 | 用户ID号码          //
-// [私有属性] : -无-                                                    //
-// [构造函数] : -无-                                                    //
-// [公开函数] : -无-                                                    //
-// [私有函数] : -无-                                                    //
+// [公开属性] :                                                       //
+//   - UserId                               字符串 | 用户ID号码       //
+// [私有属性] : -无-                                                  //
+// [构造函数] : -无-                                                  //
+// [公开函数] : -无-                                                  //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type LoginData struct {
@@ -42,12 +44,12 @@ type LoginData struct {
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                        主要函数(runner)实现                          //
+//                        主要函数(runner)实现                        //
 //--------------------------------------------------------------------//
-// 实现函数:                                                           //
-//        LoginRun(params commands.Params)       登录处理              //
+// 实现函数:                                                          //
+//        LoginRun(params commands.Params)       登录处理             //
 //--------------------------------------------------------------------//
-// 使用的内部的参数结构体(Params.Info属性对应的结构体) ： LoginData          //
+// 使用的内部的参数结构体(Params.Info属性对应的结构体) ： LoginData   //
 ////////////////////////////////////////////////////////////////////////
 
 func LoginRun(params commands.Params) error {
@@ -61,12 +63,20 @@ func LoginRun(params commands.Params) error {
 		}
 	}
 
-	//判断userId是否存在
-	//如果存在返回登陆成功，否则断开连接
-
 	//获取连接
-	connect := params.Bundle[Connect].(net.Conn)
-	connect.Close()
+	connect := params.Bundle[Connect].(*net.Conn)
+	//判断userId是否存在
+	username, err := GlobalUserService.GetId(data.UserId)
+	//如果存在返回登陆成功
+	if err == nil && !GlobalOnlineService.OnlineCheckByUserId(data.UserId) {
+		//加入在线列表
+		GlobalOnlineService.Add(data.UserId, username, connect)
+		//写入output
+		output := params.Bundle[Output].(*io.Writer)
+		fmt.Fprintln(*output, data.UserId)
+	} else {
+		return err
+	}
 
 	return nil
 }
