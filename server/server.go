@@ -112,21 +112,22 @@ func handle(conn net.Conn) {
 		n, err := conn.Read(lineBuf)
 		if err != nil {
 			if err != io.EOF {
-				fmt.Println("read error:", err)
+				log.Println("read error:", err)
 			}
 			break
 		}
 
 		line := string(lineBuf[:n])
+		log.Print(line)
 
 		cmdName := strings.ToLower(strings.SplitN(line, " ", 2)[0])
 
 		if !login {
 			loginTimes --
 			if cmdName != cmds.LoginCommandName {
-				io.WriteString(conn, "请先登录")
+				io.WriteString(conn, "请先登录\n")
 				loginTimes ++
-				break
+				continue
 			} else {
 				loginBudle := map[string]interface{}{
 					cmds.Connect: conn,
@@ -134,28 +135,31 @@ func handle(conn net.Conn) {
 				}
 
 				if err := cmds.LoginCommand.Execute(line, loginBudle); err != nil {
+					if !login && loginTimes <= 0 {
+						io.WriteString(conn, "登录次数用尽，即将退出\n")
+						//登录次数用尽
+						conn.Close()
+						break
+					}
 					//登陆失败
-					msg := fmt.Sprintf("验证失败，您还有%d次机会", loginTimes)
+					msg := fmt.Sprintf("验证失败，您还有%d次机会\n", loginTimes)
 					io.WriteString(conn, msg)
-					break
-				} else {
+
+					continue
+				} else  {
 					//登陆成功
 					login = true
 					userId = string(userIdByte)
 					continue
 				}
 
-				if !login && loginTimes <= 0 {
-					//登录次数用尽
-					conn.Close()
-					break
-				}
+
 			}
 		}
 
 		cmd, ok := cmds.CommandMap[cmdName]
 		if !ok {
-			io.WriteString(conn, "命令不存在")
+			io.WriteString(conn, "命令不存在\n")
 			continue
 		}
 

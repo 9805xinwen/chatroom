@@ -64,16 +64,16 @@ func LoginRun(params commands.Params) error {
 	}
 
 	//获取连接
-	connect := params.Bundle[Connect].(*net.Conn)
+	connect := params.Bundle[Connect].(net.Conn)
 	//判断userId是否存在
-	username, err := GlobalUserService.GetId(data.UserId)
+	username, err := GlobalUserService.GetName(data.UserId)
 	//如果存在返回登陆成功
 	if err == nil && !GlobalOnlineService.OnlineCheckByUserId(data.UserId) {
 		//加入在线列表
-		GlobalOnlineService.Add(data.UserId, username, connect)
+		GlobalOnlineService.Add(data.UserId, username, &connect)
 		//写入output
-		output := params.Bundle[Output].(*io.Writer)
-		fmt.Fprintln(*output, data.UserId)
+		output := params.Bundle[Output].(io.Writer)
+		fmt.Fprintln(output, data.UserId)
 	} else {
 		return err
 	}
