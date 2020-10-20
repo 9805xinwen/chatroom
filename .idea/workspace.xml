@@ -19,15 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="">
+    <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="Default Changelist">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/commands/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/commands/base.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/commands/dev_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/commands/dev_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/cmds/cmd.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/cmd.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/cmds/define.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/define.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/cmds/loginCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/loginCOM.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/cmds/quitCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/quitCOM.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/cmds/sendCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/sendCOM.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +180,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="implement auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement auth" />
+    <MESSAGE value="Default Changelist" />
+    <option name="LAST_COMMIT_MESSAGE" value="Default Changelist" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -278,6 +275,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="760" y="238" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603156436645" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603158729113">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603158729113" />
     <state x="100" y="100" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602913425715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -300,7 +301,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/server/cmds/sendCOM.go</url>
-          <line>72</line>
+          <line>64</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

@@ -62,11 +62,12 @@ func LoginRun(params commands.Params) error {
 			data.UserId = params.Args[0]
 		}
 	}
+
 	//获取连接
 	connect := params.Bundle[Connect].(*net.Conn)
 	//判断userId是否存在
 	username, err := GlobalUserService.GetId(data.UserId)
-	//如果存在返回登陆成功，否则断开连接
+	//如果存在返回登陆成功
 	if err == nil && !GlobalOnlineService.OnlineCheckByUserId(data.UserId) {
 		//加入在线列表
 		GlobalOnlineService.Add(data.UserId, username, connect)
@@ -74,8 +75,6 @@ func LoginRun(params commands.Params) error {
 		output := params.Bundle[Output].(io.Writer)
 		fmt.Fprintln(output, data.UserId)
 	} else {
-		//登陆失败，断开连接
-		(*connect).Close()
 		return err
 	}
 
