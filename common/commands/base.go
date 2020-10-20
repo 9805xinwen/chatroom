@@ -115,27 +115,27 @@ type ModelProvider interface {
 }
 
 ////////////////////////////////////////////////////////////////////////
-//              实现[ModelProvider接口]的模型供应结构体                   //
+//              实现[ModelProvider接口]的模型供应结构体               //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        ModelProviderBase                    参数模型供应结构体         //
+// 定义结构体:                                                        //
+//        ModelProviderBase                    参数模型供应结构体     //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        该结构体对[ModelProvider接口]进行了实现                          //
+// 描述 ：                                                            //
+//        该结构体对[ModelProvider接口]进行了实现                     //
 //--------------------------------------------------------------------//
 // ModelProviderBase                                                  //
-// [公开属性] : -无-                                                    //
-// [私有属性] :                                                         //
-//   - modelType                      reflect.Type | 绑定的结构体的类型   //
-//   - supports            map[string]ParamSupport | 支持的参数的映射     //
-// [构造函数] :                                                         //
+// [公开属性] : -无-                                                  //
+// [私有属性] :                                                       //
+//   - modelType                    reflect.Type | 绑定的结构体的类型 //
+//   - supports          map[string]ParamSupport | 支持的参数的映射   //
+// [构造函数] :                                                       //
 //   - NewDefaultModelProvider(modelType reflect.Type)                //
 //   - NewModelProvider(modelType reflect.Type,                       //
 //                      paramSupports []ParamSupport)                 //
-// [公开函数] :                                                         //
+// [公开函数] :                                                       //
 //   - GetParamsModel()                                               //
 //   - GetParamSupport(filedName string)                              //
-// [私有函数] : -无-                                                    //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type ModelProviderBase struct {
@@ -312,28 +312,28 @@ func (provider *ModelProviderBase) GetParamSupport(filedName string) (ParamSuppo
 }
 
 ////////////////////////////////////////////////////////////////////////
-//                   实现[Command接口]的命令结构体                        //
+//                   实现[Command接口]的命令结构体                    //
 //--------------------------------------------------------------------//
-// 定义结构体:                                                          //
-//        CommandBase                      参数模型供应结构体            //
+// 定义结构体:                                                        //
+//        CommandBase                      参数模型供应结构体         //
 //--------------------------------------------------------------------//
-// 描述 ：                                                             //
-//        该结构体对[Command接口]进行了实现                               //
+// 描述 ：                                                            //
+//        该结构体对[Command接口]进行了实现                           //
 //--------------------------------------------------------------------//
 // CommandBase                                                        //
-// [公开属性] : -无-                                                    //
-// [私有属性] :                                                         //
-//   - runner           func(params Params) error | 对命令行处理的函数   //
-//   - flags                        *flag.FlagSet | 解析命令的解析器     //
-//   - modelProvider                modelProvider | 参数模型供应结构体   //
-// [构造函数] :                                                         //
+// [公开属性] : -无-                                                  //
+// [私有属性] :                                                       //
+//   - runner           func(params Params) error | 对命令行处理的函数//
+//   - flags                        *flag.FlagSet | 解析命令的解析器  //
+//   - modelProvider                modelProvider | 参数模型供应结构体//
+// [构造函数] :                                                       //
 //   - NewCommand(commandName string, errorHandling ErrorHandling,    //
 //       runner func(params Params) error, provider ModelProvider)    //
 //   - CreateDefaultCommand(command string, modelType reflect.Type,   //
 //       runner func(params Params) error)                            //
-// [公开函数] :                                                         //
+// [公开函数] :                                                       //
 //   - Execute(str string, bundle map[string]interface{}) error       //
-// [私有函数] : -无-                                                    //
+// [私有函数] : -无-                                                  //
 ////////////////////////////////////////////////////////////////////////
 
 type ErrorHandling flag.ErrorHandling
