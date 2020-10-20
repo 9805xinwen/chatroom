@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec6d1e18-da56-4b1e-8159-794f12ee8ac1" name="Default Changelist" comment="Default Changelist">
-      <change beforePath="$PROJECT_DIR$/server/cmds/loginCOM.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/cmds/loginCOM.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/commands/base.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/commands/base.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="go.vgo" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -269,14 +269,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602901243304" />
-    <state x="760" y="238" key="SettingsEditor" timestamp="1603156436645">
+    <state x="760" y="238" key="SettingsEditor" timestamp="1603160868939">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="760" y="238" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603156436645" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603160258995">
+    <state x="760" y="238" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603160868939" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1603160329531">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603160258995" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1603160329531" />
     <state x="100" y="100" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1602913425715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
