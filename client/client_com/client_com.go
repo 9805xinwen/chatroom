@@ -1,6 +1,7 @@
 package client_com
 
 import (
+	"fmt"
 	"os"
 	"strings"
 )
@@ -85,16 +86,16 @@ func (com commandquit) RequireParam() bool {
 }
 
 func (com commandquit) CommandFormat(param string, reqpara bool) {
-	//if !reqpara {
-	//	if param == "" {
-	//		fmt.Println("退出成功！")
-	//		com.Execute()
-	//	}
-	//}
+	if !reqpara {
+		if param == "" {
+			fmt.Println("退出成功！")
+			com.Execute()
+		}
+	}
 }
 
 func (com commandquit) Execute() {
-	os.Exit(-1)
+	os.Exit(0)
 }
 
 //把字符串分为【命令 参数】两部分

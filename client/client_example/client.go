@@ -1,6 +1,7 @@
 package main
 
 import (
+	"awesomeProject1/Test/chatroom/cm"
 	"bufio"
 	"chatroom/client/client_com"
 	"fmt"
@@ -13,9 +14,12 @@ var writeStr, readStr = make([]byte, 1024), make([]byte, 1024)
 var (
 	chanQuit = make(chan bool, 0)
 )
+//var (
+//	wg sync.WaitGroup = sync.WaitGroup{} // 等待各个socket连接处理
+//)
 
 func main() {
-	conn, err := net.Dial("tcp", "127.0.0.1:8000")
+	conn, err := net.Dial("tcp", "127.0.0.1:3000")
 	if err != nil {
 		log.Fatalln(err)
 		log.Println("Check connection settings")
@@ -25,10 +29,11 @@ func main() {
 	defer conn.Close()
 
 	fmt.Printf("%#v$请登录(命令 id)\n", conn.RemoteAddr().String())
-
+	//wg.Add(2)
 	go handleSend(conn)
 	go handleReceive(conn)
 	<-chanQuit
+	//wg.Wait() // 等待是否有未处理完socket处理
 }
 
 func handleSend(conn net.Conn) {
@@ -47,7 +52,7 @@ func handleSend(conn net.Conn) {
 		//	//正确与否都继续输入
 		//client_com.Commands[cmd].CommandFormat(param, client_com.Commands[cmd].RequireParam())
 		//	//执行命令
-		//	//cm.Commands[cmd].Execute()
+		//cm.Commands[cmd].Execute()
 
 		//给服务器发送命令
 		_, err := conn.Write([]byte(line))
