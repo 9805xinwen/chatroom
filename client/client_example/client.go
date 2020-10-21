@@ -40,7 +40,10 @@ func handleSend(conn net.Conn) {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		line, _ := reader.ReadString('\n')
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			break
+		}
 		//把字符串分为【命令 参数】两部分
 		cmd, _ := client_com.SpliteTwo(line)
 		//判断输入的命令是否在map中
