@@ -17,9 +17,10 @@ type commandMap map[string]Command
 
 var (
 	Commands = commandMap{
-		"login": commandlogin{},
-		"send":  commandsend{},
-		"quit":  commandquit{},
+		"login":    commandlogin{},
+		"send":     commandsend{},
+		"quit":     commandquit{},
+		"register": commandregister{},
 	}
 )
 
@@ -93,6 +94,17 @@ func (com commandquit) CommandFormat(param string, reqpara bool) {
 func (com commandquit) Execute() {
 	os.Exit(0)
 }
+
+type commandregister struct{}
+
+func (com commandregister) RequireParam() bool {
+	return true
+}
+
+func (com commandregister) CommandFormat(str string, reqpara bool) {
+
+}
+func (com commandregister) Execute() {}
 
 //把字符串分为【命令 参数】两部分
 func SpliteTwo(line string) (string, string) {
