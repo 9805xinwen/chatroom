@@ -132,7 +132,7 @@ func handle(conn net.Conn) {
 
 		if !login {
 			loginTimes --
-			if cmdName != cmds.LoginCommandName {
+			if cmdName != cmds.LoginCommandName && cmdName != cmds.RegisterCommandName{
 				io.WriteString(conn, "请先登录\n")
 				loginTimes ++
 				continue
@@ -141,6 +141,21 @@ func handle(conn net.Conn) {
 					cmds.Connect: conn,
 					cmds.Output: userIdBuf,
 				}
+
+				if cmdName == cmds.RegisterCommandName {
+					loginTimes++
+					err := cmds.RegisterCommand.Execute(line, loginBudle)
+					if err != nil {
+						io.WriteString(conn, err.Error())
+						continue
+					}
+					userId, _ = userIdBuf.ReadString('\n')
+					userId = strings.Fields(userId)[0]
+					msg := fmt.Sprintf("注册成功，请牢记您的id: %s", userId)
+					io.WriteString(conn, msg)
+					continue
+				}
+
 
 				if err := cmds.LoginCommand.Execute(line, loginBudle); err != nil {
 					if !login && loginTimes <= 0 {

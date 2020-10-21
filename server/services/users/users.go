@@ -33,25 +33,24 @@ func NewRedisUser() *RedisUsers {
 }
 
 func (user *RedisUsers) Register(name string) (id string, err error) {
+	nameKey := fmt.Sprintf("USER:NAME:%s", name)
+
+	if res, _ := user.db.Exists(nameKey).Result(); res != 0 {
+		return "", errors.New("用户名已存在")
+	}
+
 	rrand := util.NewRandomUnique(user.db, 10000, 99999)
 	id = strconv.FormatInt(rrand.NextWithKey("user"), 10)
 
 	idKey := fmt.Sprintf("USER:ID:%s", id)
-	nameKey := fmt.Sprintf("USER:NAME:%s", name)
 
 	pipe := user.db.TxPipeline()
 	defer pipe.Close()
 
-	if _, err := pipe.Do("HSETNX", idKey, "name", name).Result(); err != nil {
-		return "", errors.New("id重复")
-	}
-	if _, err := pipe.Do("HSETNX", nameKey, "id", id).Result(); err != nil  {
-		return "", errors.New("name重复")
-	}
+	pipe.HSetNX(idKey, "name", name)
+	pipe.HSetNX(nameKey, "id", id)
 
-	if _, err := pipe.Exec(); err != nil {
-		return "", err
-	}
+	pipe.Exec()
 
 	return id, nil
 }
