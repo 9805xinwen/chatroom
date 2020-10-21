@@ -1,10 +1,8 @@
-package client
+package client_com
 
 import (
-	"fmt"
 	"os"
 	"strings"
-	"unicode"
 )
 
 var ()
@@ -34,20 +32,20 @@ func (com commandlogin) RequireParam() bool {
 }
 
 func (com commandlogin) CommandFormat(str string, reqpara bool) {
-	if reqpara {
-		params := strings.SplitN(strings.Trim(str, "\r\n"), " ", 2)
-		len := len(params)
-		if len == 1 {
-			for _, r := range str {
-				if !(unicode.IsDigit(r)) {
-					fmt.Println("输入不合法")
-					fmt.Printf("请输入(命令 参数):\n")
-				}
-			}
-		}
-		fmt.Println("输入合法")
-		fmt.Printf("请输入(命令 参数):\n")
-	}
+	//if reqpara {
+	//	params := strings.SplitN(strings.Trim(str, "\r\n"), " ", 2)
+	//	len := len(params)
+	//	if len == 1 {
+	//		for _, r := range str {
+	//			if !(unicode.IsDigit(r)) {
+	//				fmt.Println("输入不合法")
+	//				fmt.Printf("请输入(命令 参数):\n")
+	//			}
+	//		}
+	//	}
+	//	fmt.Println("输入合法")
+	//	fmt.Printf("请输入(命令 参数):\n")
+	//}
 }
 
 func (com commandlogin) Execute() {
@@ -61,21 +59,21 @@ func (com commandsend) RequireParam() bool {
 }
 
 func (com commandsend) CommandFormat(str string, reqpara bool) {
-	if reqpara {
-		params := strings.SplitN(strings.Trim(str, "\r\n"), " ", 2)
-		len := len(params)
-		if len == 2 {
-			username := params[0]
-			msg := params[1]
-			if username != "" && msg != "" {
-				fmt.Println("输入合法")
-				fmt.Printf("请输入(命令 参数):\n")
-			}
-		} else {
-			fmt.Println("输入不合法")
-			fmt.Printf("请输入(命令 参数):\n")
-		}
-	}
+	//if reqpara {
+	//	params := strings.SplitN(strings.Trim(str, "\r\n"), " ", 2)
+	//	len := len(params)
+	//	if len == 2 {
+	//		username := params[0]
+	//		msg := params[1]
+	//		if username != "" && msg != "" {
+	//			fmt.Println("输入合法")
+	//			fmt.Printf("请输入(命令 参数):\n")
+	//		}
+	//	} else {
+	//		fmt.Println("输入不合法")
+	//		fmt.Printf("请输入(命令 参数):\n")
+	//	}
+	//}
 }
 
 func (com commandsend) Execute() {}
@@ -87,12 +85,12 @@ func (com commandquit) RequireParam() bool {
 }
 
 func (com commandquit) CommandFormat(param string, reqpara bool) {
-	if !reqpara {
-		if param == "" {
-			fmt.Println("退出成功！")
-			com.Execute()
-		}
-	}
+	//if !reqpara {
+	//	if param == "" {
+	//		fmt.Println("退出成功！")
+	//		com.Execute()
+	//	}
+	//}
 }
 
 func (com commandquit) Execute() {
