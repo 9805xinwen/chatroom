@@ -1,12 +1,9 @@
 package client_com
 
 import (
-	"fmt"
 	"os"
 	"strings"
 )
-
-var ()
 
 type (
 	Command interface {
@@ -88,7 +85,6 @@ func (com commandquit) RequireParam() bool {
 func (com commandquit) CommandFormat(param string, reqpara bool) {
 	if !reqpara {
 		if param == "" {
-			fmt.Println("退出成功！")
 			com.Execute()
 		}
 	}

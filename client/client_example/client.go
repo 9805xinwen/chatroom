@@ -1,7 +1,6 @@
 package main
 
 import (
-	"awesomeProject1/Test/chatroom/cm"
 	"bufio"
 	"chatroom/client/client_com"
 	"fmt"
@@ -14,9 +13,6 @@ var writeStr, readStr = make([]byte, 1024), make([]byte, 1024)
 var (
 	chanQuit = make(chan bool, 0)
 )
-//var (
-//	wg sync.WaitGroup = sync.WaitGroup{} // 等待各个socket连接处理
-//)
 
 func main() {
 	conn, err := net.Dial("tcp", "127.0.0.1:3000")
@@ -29,19 +25,20 @@ func main() {
 	defer conn.Close()
 
 	fmt.Printf("%#v$请登录(命令 id)\n", conn.RemoteAddr().String())
-	//wg.Add(2)
+
 	go handleSend(conn)
 	go handleReceive(conn)
 	<-chanQuit
-	//wg.Wait() // 等待是否有未处理完socket处理
+
 }
 
 func handleSend(conn net.Conn) {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		line, err := reader.ReadString('\n')
-		if err != nil {
+		line, err0 := reader.ReadString('\n')
+		if err0 != nil {
+			fmt.Println("读取输入错误！")
 			break
 		}
 		//把字符串分为【命令 参数】两部分
@@ -50,12 +47,9 @@ func handleSend(conn net.Conn) {
 		if _, ok := client_com.Commands[cmd]; !ok {
 			fmt.Println("输入命令不在列表中！请重新输入:")
 			continue
-		} //else {
-		//	//判断该命令是否需要参数，且后面的参数格式是否正确
-		//	//正确与否都继续输入
-		//client_com.Commands[cmd].CommandFormat(param, client_com.Commands[cmd].RequireParam())
-		//	//执行命令
-		//cm.Commands[cmd].Execute()
+		}
+		//执行命令
+		client_com.Commands[cmd].Execute()
 
 		//给服务器发送命令
 		_, err := conn.Write([]byte(line))
