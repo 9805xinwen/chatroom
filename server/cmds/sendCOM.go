@@ -5,8 +5,10 @@ import (
 	"chatroom/common/utils"
 	"chatroom/server/services/message"
 	"errors"
+	"log"
 	"net"
 	"reflect"
+	"strings"
 )
 
 ////////////////////////////////////////////////////////////////////////
@@ -57,10 +59,12 @@ type SendData struct {
 
 func SendRun(params commands.Params) error {
 	//获取解析数据
-	data := params.Info.(SendData)
+	data := params.Info.(*SendData)
 
 	//检查是否存在发送目标用户
 	_, err := GlobalUserService.GetId(data.Username)
+
+
 	if err != nil {
 		return errors.New("目标用户不存在！")
 	}
@@ -70,12 +74,16 @@ func SendRun(params commands.Params) error {
 
 	//从userId获取username
 	username, err := GlobalUserService.GetName(userId)
+
 	if err != nil {
 		return err
 	}
 
 	//获取发送者的连接
-	fromConn := params.Bundle[Connect].(*net.Conn)
+	fromConn := params.Bundle[Connect].(net.Conn)
+
+	//输出在线日志
+	log.Print("检查[",username,"]在线情况:",GlobalOnlineService.OnlineCheckByUserName(data.Username))
 
 	//获取发送连接,不在线就设置为nil
 	var toConn *net.Conn
@@ -87,6 +95,7 @@ func SendRun(params commands.Params) error {
 
 	//发送数据内容处理
 	content, err := utils.DoubleQuotedStringsMarch(data.Massage)
+	content = strings.ReplaceAll(content,"%20"," ")
 	if err != nil {
 		return err
 	}
@@ -94,11 +103,12 @@ func SendRun(params commands.Params) error {
 	msg := message.Massage{
 		FromUser: username,
 		ToUser:   data.Username,
-		FromConn: fromConn,
+		FromConn: &fromConn,
 		ToConn:   toConn,
 		Content:  content,
 	}
-	GlobalMassageService.Send(msg)
 
+	GlobalMassageService.Send(msg)
+	log.Printf("%s向%s发消息：\"%s\"",username,data.Username,content)
 	return nil
 }

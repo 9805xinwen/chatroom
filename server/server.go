@@ -94,15 +94,14 @@ func (server *Server) Serve(l net.Listener) error {
 			}
 			return err
 		}
-
+		log.Printf("与[%s]建立连接", tcpConn.RemoteAddr())
 		go handle(tcpConn)
 	}
 }
 
 func handle(conn net.Conn) {
 	lineBuf := make([]byte, 1024)  //用于从conn里读取数据
-	userIdByte := make([]byte, 5)  //用于login成功后读取用户id
-	userIdBuf := bytes.NewBuffer(userIdByte)
+	userIdBuf := bytes.NewBuffer(nil)
 
 	var login bool  //是否已登陆
 	var loginTimes = 3  //登录次数
@@ -113,14 +112,23 @@ func handle(conn net.Conn) {
 		if err != nil {
 			if err != io.EOF {
 				log.Println("read error:", err)
+				if login {
+					cmds.GlobalOnlineService.Delete(userId)
+				}
 			}
 			break
 		}
 
 		line := string(lineBuf[:n])
-		log.Print(line)
+
+		if !login {
+			log.Printf("未认证主机[%s]：%s", conn.RemoteAddr(), line)
+		} else {
+			log.Printf("用户[ID:%s]: %s", userId, line)
+		}
 
 		cmdName := strings.ToLower(strings.SplitN(line, " ", 2)[0])
+		cmdName = strings.TrimSpace(cmdName)
 
 		if !login {
 			loginTimes --
@@ -136,24 +144,23 @@ func handle(conn net.Conn) {
 
 				if err := cmds.LoginCommand.Execute(line, loginBudle); err != nil {
 					if !login && loginTimes <= 0 {
-						io.WriteString(conn, "登录次数用尽，即将退出\n")
+						io.WriteString(conn, "登录次数用尽，断开连接\n")
 						//登录次数用尽
 						conn.Close()
 						break
 					}
 					//登陆失败
-					msg := fmt.Sprintf("验证失败，您还有%d次机会\n", loginTimes)
+					msg := fmt.Sprintf("登录失败，您还有%d次机会\n", loginTimes)
 					io.WriteString(conn, msg)
-
 					continue
 				} else  {
 					//登陆成功
+					io.WriteString(conn, "登录成功\n")
 					login = true
-					userId = string(userIdByte)
+					userId, _ = userIdBuf.ReadString('\n')
+					userId = strings.Fields(userId)[0]
 					continue
 				}
-
-
 			}
 		}
 
@@ -167,6 +174,8 @@ func handle(conn net.Conn) {
 			cmds.Connect: conn,
 			cmds.UserId: userId,
 		}
-		cmd.Execute(line, bundle)
+		if err := cmd.Execute(line, bundle); err != nil {
+			io.WriteString(conn, err.Error())
+		}
 	}
 }

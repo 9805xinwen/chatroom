@@ -1,6 +1,9 @@
 package users
 
-import "net"
+import (
+	"log"
+	"net"
+)
 
 //Online 一个接口 定义了操作用户在线列表的方法
 type Online interface {
@@ -30,11 +33,9 @@ func NewMapOnline() *MapOnline {
 }
 
 func (online *MapOnline) Add(usersId ,userName string, conn *net.Conn) bool {
-	if _, ok := online.mapId[usersId]; !ok {
-		return false
-	}
 	online.mapId[usersId] = conn
 	online.mapId[userName] = conn
+	log.Print(usersId,"[",userName,"]","加入在线列表")
 	return true
 }
 
@@ -64,6 +65,7 @@ func (online *MapOnline) QueryConnByUserName(userName string) *net.Conn {
 
 func (online *MapOnline) Delete(userId string) bool {
 	delete(online.mapId, userId)
+	log.Print(userId,"离线")
 	return true
 }
 
