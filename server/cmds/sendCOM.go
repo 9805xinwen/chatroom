@@ -18,6 +18,7 @@ import (
 // [命令参数] :                                                       //
 //             -msg                          发送的信息               //
 //             -user                         发送给某个用户           //
+//             -all                          群发                     //
 //--------------------------------------------------------------------//
 // 使用案例:                                                          //
 // send -user USERNAME -msg "hello!"                                  //
@@ -46,6 +47,7 @@ var SendCommand commands.Command = commands.CreateDefaultCommand(SendCommandName
 type SendData struct {
 	Username string `name:"user" value:"" usage:"发送给某个用户"`
 	Massage  string `name:"msg"  value:"" usage:"发送的信息"`
+	All      bool   `name:"all"   value:"false" usage:"群发"`
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -58,16 +60,10 @@ type SendData struct {
 ////////////////////////////////////////////////////////////////////////
 
 func SendRun(params commands.Params) error {
+
+
 	//获取解析数据
 	data := params.Info.(*SendData)
-
-	//检查是否存在发送目标用户
-	_, err := GlobalUserService.GetId(data.Username)
-
-
-	if err != nil {
-		return errors.New("目标用户不存在！")
-	}
 
 	//获取发送者UserId
 	userId := params.Bundle[UserId].(string)
@@ -79,36 +75,70 @@ func SendRun(params commands.Params) error {
 		return err
 	}
 
-	//获取发送者的连接
-	fromConn := params.Bundle[Connect].(net.Conn)
-
-	//输出在线日志
-	log.Print("检查[",username,"]在线情况:",GlobalOnlineService.OnlineCheckByUserName(data.Username))
-
-	//获取发送连接,不在线就设置为nil
-	var toConn *net.Conn
-	if !GlobalOnlineService.OnlineCheckByUserName(data.Username) {
-		toConn = nil
-	} else {
-		toConn = GlobalOnlineService.QueryConnByUserName(data.Username)
-	}
-
 	//发送数据内容处理
 	content, err := utils.DoubleQuotedStringsMarch(data.Massage)
-	content = strings.ReplaceAll(content,"%20"," ")
 	if err != nil {
 		return err
 	}
+	content = strings.ReplaceAll(content,"%20"," ")
+
+	//获取发送者的连接
+	fromConn := params.Bundle[Connect].(net.Conn)
+
+	if data.All {
+
+		allName := GlobalOnlineService.GetMapName()
+		for onlineUser,onlineConn := range allName {
+
+			if onlineUser != username {
+				err := sendOnePersonMsg(username,onlineUser,data.Massage,&fromConn,onlineConn)
+				if err != nil {
+					return err
+				}
+			}
+
+		}
+
+	} else {
+
+		//检查是否存在发送目标用户
+		_, err = GlobalUserService.GetId(data.Username)
+		if err != nil {
+			return errors.New("目标用户不存在！")
+		}
+
+		//输出在线日志
+		log.Print("检查[",data.Username,"]在线情况:",GlobalOnlineService.OnlineCheckByUserName(data.Username))
+
+		//获取发送连接,不在线就设置为nil
+		var toConn *net.Conn
+		if !GlobalOnlineService.OnlineCheckByUserName(data.Username) {
+			toConn = nil
+		} else {
+			toConn = GlobalOnlineService.QueryConnByUserName(data.Username)
+		}
+
+		err := sendOnePersonMsg(username,data.Username,data.Massage,&fromConn,toConn)
+
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func sendOnePersonMsg(fromUser,toUser,content string,fromConn,toConn *net.Conn) error {
 
 	msg := message.Massage{
-		FromUser: username,
-		ToUser:   data.Username,
-		FromConn: &fromConn,
+		FromUser: fromUser,
+		ToUser:   toUser,
+		FromConn: fromConn,
 		ToConn:   toConn,
 		Content:  content,
 	}
 
-	GlobalMassageService.Send(msg)
-	log.Printf("%s向%s发消息：\"%s\"",username,data.Username,content)
-	return nil
+	err := GlobalMassageService.Send(msg)
+	log.Printf("%s向%s发消息：\"%s\"",fromUser,toUser,content)
+
+	return err
 }
